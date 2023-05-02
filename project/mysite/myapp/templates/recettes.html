@@ -1,0 +1,32 @@
+{% extends 'base.html' %}
+
+{% block content %}
+  <h1>{{ recette.titre }}</h1>
+  <p>Temps de préparation: {{ recette.temps_preparation }} minutes</p>
+  <p>Tags:
+  {% for tag in recette.tag.all %}
+    <a href="{% url 'tag_detail' tag.pk %}">{{ tag.libelle }}</a>
+    {% if not forloop.last %}, {% endif %}
+  {% endfor %}
+  </p>
+  <p>Ingrédients:</p>
+  <ul>
+  {% for ingredient in recette.ingredient_set.all %}
+    <li>{{ ingredient.name }}</li>
+  {% endfor %}
+  </ul>
+  <p>Étapes:</p>
+  <ol>
+  {% for etape in recette.etapes%}
+    <li>{{ etape }}</li>
+  {% endfor %}
+  </ol>
+  <p>Commentaires:</p>
+  {% for association in recette.associationcommentaire_set.all %}
+    <div>
+      <p>Commentaire de {{ association.personne.nom }}:</p>
+      <p>{{ association.commentaire.contenu }}</p>
+      <p>Note: {{ association.note.valeur }}/5</p>
+    </div>
+  {% endfor %}
+{% endblock %}

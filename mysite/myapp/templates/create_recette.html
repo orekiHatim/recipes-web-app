@@ -1,0 +1,20 @@
+{% extends 'base.html' %}
+{%block title %}
+
+RecetteCuisine | Création
+
+{%endblock%}
+{%block content%}
+<div class="card mt-3">
+    <div class="card-header  ">
+    <h1> liste un recette </h1>
+</div>
+    <div class="card-body">
+<form method="post">
+    {%csrf_token%}
+    {{form.as_p}}
+    <button type="submit" class="btn btn-primary col-12">Ajouter Recette</button>
+    </form>
+    </div>
+</div>
+  {%endblock%}
